@@ -1,4 +1,5 @@
-﻿using Lers.Networking;
+﻿using Lers;
+using Lers.Networking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,45 +32,121 @@ namespace LersAppHelper.Connectors
 
         public async void Run(DateTime dateBgn, DateTime dateEnd)
         {
-            ProxySettings proxySettings = ProxySettings.GetSystemDefaultProxy();
-            var authInfo = new Lers.Networking.BasicAuthenticationInfo(this._Username, 
-                                    Lers.Networking.SecureStringHelper.ConvertToSecureString(this._Password));
-
-            theSplash.Show();
-            await this.theServer.ConnectAsync(this._Hostname, this._Port, proxySettings, authInfo, connectCancellation.Token);
-
-            // Ищем точку учёта. В этом примере мы получем её по номеру.
-            var measurePoint = this.theServer.MeasurePoints.GetByNumber(727);
-
-            Log(measurePoint.FullTitle);
-
-            // Запрашиваем суточные данные за указанный интервал
-            var consumptionData = measurePoint.Data.GetConsumption(dateBgn, dateEnd, Lers.Data.DeviceDataType.Day);
-
-            // Выводим на экран массовый расход
-            foreach (var consumptionRecord in consumptionData)
+            string err = "";
+            try
             {
-                double? valueT = consumptionRecord.GetValue(Lers.Data.DataParameter.T_in.ToString());
-                string stringValueT = valueT.HasValue ? valueT.Value.ToString() : "<нет данных>";
+                ProxySettings proxySettings = ProxySettings.GetSystemDefaultProxy();
+                var authInfo = new Lers.Networking.BasicAuthenticationInfo(this._Username,
+                                        Lers.Networking.SecureStringHelper.ConvertToSecureString(this._Password));
 
+                theSplash.Show();
+                await this.theServer.ConnectAsync(this._Hostname, this._Port, proxySettings, authInfo, connectCancellation.Token);
 
-                double? valueP = consumptionRecord.GetValue(Lers.Data.DataParameter.P_in.ToString());
-                string stringValueP = valueP.HasValue ? valueP.Value.ToString() : "<нет данных>";
+                // Ищем точку учёта. В этом примере мы получем её по номеру.
+                var measurePoint = this.theServer.MeasurePoints.GetByNumber(727);
 
+                Log(measurePoint.FullTitle);
 
-                if (theListView != null)
+                // Запрашиваем суточные данные за указанный интервал
+                var consumptionData = measurePoint.Data.GetConsumption(dateBgn, dateEnd, Lers.Data.DeviceDataType.Day);
+
+                // Выводим на экран массовый расход
+                foreach (var consumptionRecord in consumptionData)
                 {
-                    ListViewItem Item = new ListViewItem(consumptionRecord.DateTime.ToLongDateString());
-                    Item.SubItems.Add(stringValueT);
-                    Item.SubItems.Add(stringValueP);
+                    double? valueT = consumptionRecord.GetValue(Lers.Data.DataParameter.T_in.ToString());
+                    string stringValueT = valueT.HasValue ? valueT.Value.ToString() : "<нет данных>";
 
-                    theListView.Items.Add(Item);
+
+                    double? valueP = consumptionRecord.GetValue(Lers.Data.DataParameter.P_in.ToString());
+                    string stringValueP = valueP.HasValue ? valueP.Value.ToString() : "<нет данных>";
+
+
+                    if (theListView != null)
+                    {
+                        ListViewItem Item = new ListViewItem(consumptionRecord.DateTime.ToLongDateString());
+                        Item.SubItems.Add(stringValueT);
+                        Item.SubItems.Add(stringValueP);
+
+                        theListView.Items.Add(Item);
+                    }
+                }
+
+            }
+            catch (AuthorizationFailedException ex)
+            {
+                err = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
+                }
+
+            }
+            catch (ServerConnectionException ex)
+            {
+                err = "Ошибка подключения" + Environment.NewLine + ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
                 }
             }
+            catch (TimeoutException ex)
+            {
+                err = "Превышено время ожидания!" + Environment.NewLine + ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
+                }
+                err += Environment.NewLine + 
+                    Environment.NewLine +
+                    "Убедитесь, что сервер ЛЭРС УЧЕТ запущен, работает правильно и имеет соединение с базой данных.";
+            }
+            catch (RequestDisconnectException ex)
+            {
+                err = "Разрыв соединения!" + Environment.NewLine + ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
+                }
+                err += Environment.NewLine +
+                    Environment.NewLine +
+                    "Проверьте параметры подключения, настройки прокси и брэндмауэра.";
+            }
+            catch (OperationCanceledException ex)
+            {
+                err = "Операция отменена!" + Environment.NewLine + ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
+                }
+            }
+            catch (VersionMismatchException ex)
+            {
+                err = "Версии клиента и сервера отличаются!" + Environment.NewLine + ex.Message + Environment.NewLine;
+                err += "Версия клиента: " + ex.ClientVersion.BuildNumber.ToString() + Environment.NewLine;
+                err += "Версия сервера: " + ex.ServerVersion.BuildNumber.ToString() + Environment.NewLine;
 
-
-            this.connectCancellation.CancelAfter(1000);
-            theSplash.Hide();
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
+                }
+            }
+            catch (Exception ex)
+            {
+                err = "Неизвестная ошибка!" + Environment.NewLine + ex.Message;
+                if (ex.InnerException != null)
+                {
+                    err += Environment.NewLine + ex.InnerException.Message;
+                }
+            }
+            finally
+            {
+                this.connectCancellation.CancelAfter(1000);
+                this. theSplash.Hide();
+                if (err.Length > 0)
+                {
+                    MessageBox.Show(err, "Ошибка подключения!");
+                }
+            }
         }
     }
 }
