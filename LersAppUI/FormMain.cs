@@ -24,6 +24,12 @@ namespace LersAppUI
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
+            if (this.dateTimePickerBgn.Value.Date >= this.dateTimePickerEnd.Value.Date)
+            {
+                MessageBox.Show("Дата начало периода должна быть меньше даты завершения периода");
+                return;
+            }
+
             this.listViewMeasure.Items.Clear();
 
             LersAppHelper.Loggers.ILogger theLoggerForm = new LersAppHelper.Loggers.LoggerForm();
