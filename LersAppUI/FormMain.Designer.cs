@@ -39,6 +39,8 @@
             this.columnHeaderData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderT = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.textBoxLog = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dateTimePickerBgn
@@ -89,10 +91,9 @@
             this.columnHeaderData,
             this.columnHeaderT,
             this.columnHeaderP});
-            this.listViewMeasure.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listViewMeasure.Location = new System.Drawing.Point(0, 181);
+            this.listViewMeasure.Location = new System.Drawing.Point(12, 203);
             this.listViewMeasure.Name = "listViewMeasure";
-            this.listViewMeasure.Size = new System.Drawing.Size(1144, 465);
+            this.listViewMeasure.Size = new System.Drawing.Size(682, 633);
             this.listViewMeasure.TabIndex = 7;
             this.listViewMeasure.UseCompatibleStateImageBehavior = false;
             this.listViewMeasure.View = System.Windows.Forms.View.Details;
@@ -100,7 +101,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 137);
+            this.label4.Location = new System.Drawing.Point(36, 139);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(121, 25);
             this.label4.TabIndex = 8;
@@ -131,11 +132,31 @@
             this.columnHeaderP.Text = "Давление";
             this.columnHeaderP.Width = 120;
             // 
+            // textBoxLog
+            // 
+            this.textBoxLog.Location = new System.Drawing.Point(813, 203);
+            this.textBoxLog.Multiline = true;
+            this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.ReadOnly = true;
+            this.textBoxLog.Size = new System.Drawing.Size(840, 633);
+            this.textBoxLog.TabIndex = 10;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(813, 139);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(241, 25);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Протокол выполнения:";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 646);
+            this.ClientSize = new System.Drawing.Size(1700, 862);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.buttonRun);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listViewMeasure);
@@ -164,6 +185,8 @@
         private System.Windows.Forms.ColumnHeader columnHeaderData;
         private System.Windows.Forms.ColumnHeader columnHeaderT;
         private System.Windows.Forms.ColumnHeader columnHeaderP;
+        private System.Windows.Forms.TextBox textBoxLog;
+        private System.Windows.Forms.Label label5;
     }
 }
 

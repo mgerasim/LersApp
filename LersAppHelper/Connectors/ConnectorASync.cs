@@ -42,15 +42,15 @@ namespace LersAppHelper.Connectors
                 theSplash.Show();
                 await this.theServer.ConnectAsync(this._Hostname, this._Port, proxySettings, authInfo, connectCancellation.Token);
 
-                // Ищем точку учёта. В этом примере мы получем её по номеру.
+                this.Log("Ищем точку учёта.");
                 var measurePoint = this.theServer.MeasurePoints.GetByNumber(727);
 
-                Log(measurePoint.FullTitle);
+                this.Log(measurePoint.FullTitle);
 
-                // Запрашиваем суточные данные за указанный интервал
+                this.Log("Запрашиваем суточные данные за указанный интервал");
                 var consumptionData = measurePoint.Data.GetConsumption(dateBgn, dateEnd, Lers.Data.DeviceDataType.Day);
 
-                // Выводим на экран массовый расход
+                this.Log("Выводим на экран массовый расход");
                 foreach (var consumptionRecord in consumptionData)
                 {
                     double? valueT = consumptionRecord.GetValue(Lers.Data.DataParameter.T_in.ToString());
@@ -145,6 +145,7 @@ namespace LersAppHelper.Connectors
                 if (err.Length > 0)
                 {
                     MessageBox.Show(err, "Ошибка подключения!");
+                    this.Log(err);
                 }
             }
         }

@@ -26,15 +26,22 @@ namespace LersAppUI
 
         private void buttonRun_Click(object sender, EventArgs e)
         {
+            LersAppHelper.Loggers.ILogger theLoggerForm = new LersAppHelper.Loggers.LoggerForm(this.textBoxLog);
+
+
+
             if (this.dateTimePickerBgn.Value.Date >= this.dateTimePickerEnd.Value.Date)
             {
-                MessageBox.Show("Дата начало периода должна быть меньше даты завершения периода");
+                string err = "Дата начало периода должна быть меньше даты завершения периода";
+                theLoggerForm.Log(err);
+                MessageBox.Show(err);
                 return;
             }
 
+            theLoggerForm.Log("Очистка предыдущих данных");
             this.listViewMeasure.Items.Clear();
 
-            LersAppHelper.Loggers.ILogger theLoggerForm = new LersAppHelper.Loggers.LoggerForm();
+            theLoggerForm.Log("Установливаем соединение с сервером");
             LersAppHelper.Connectors.ConnectorSync theConnectorSync = new LersAppHelper.Connectors.ConnectorSync(theLoggerForm, this.listViewMeasure);
 
             Splash theSplash = new Splash();
@@ -42,6 +49,7 @@ namespace LersAppUI
                 this.listViewMeasure, 
                 theSplash);
             theSplash.connectCancellation = theConnectorASync.connectCancellation;
+            theLoggerForm.Log("Запускаем рассчет");
             theConnectorASync.Run(this.dateTimePickerBgn.Value.Date, this.dateTimePickerEnd.Value.Date);
         }
     }
