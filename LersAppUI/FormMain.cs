@@ -15,6 +15,8 @@ namespace LersAppUI
         public FormMain()
         {
             InitializeComponent();
+            this.dateTimePickerBgn.Value = DateTime.Now.AddMonths(-1);
+            this.dateTimePickerEnd.Value = DateTime.Now;
         }
 
         private void label3_Click(object sender, EventArgs e)

@@ -52,7 +52,6 @@
     <Compile Include="Connectors\ConnectorASync.cs" />
     <Compile Include="Connectors\ConnectorBase.cs" />
     <Compile Include="Connectors\ConnectorSync.cs" />
-    <Compile Include="Connectors\ConnectorThread.cs" />
     <Compile Include="Connectors\IConnector.cs" />
     <Compile Include="LersAppConnector.cs" />
     <Compile Include="Loggers\ILogger.cs" />
