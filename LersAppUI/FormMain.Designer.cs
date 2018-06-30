@@ -41,11 +41,19 @@
             this.columnHeaderP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxHostname = new System.Windows.Forms.TextBox();
+            this.numericUpDownPort = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPort)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePickerBgn
             // 
-            this.dateTimePickerBgn.Location = new System.Drawing.Point(41, 77);
+            this.dateTimePickerBgn.Location = new System.Drawing.Point(45, 208);
             this.dateTimePickerBgn.Name = "dateTimePickerBgn";
             this.dateTimePickerBgn.Size = new System.Drawing.Size(296, 31);
             this.dateTimePickerBgn.TabIndex = 1;
@@ -53,7 +61,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 31);
+            this.label1.Location = new System.Drawing.Point(16, 162);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(288, 25);
             this.label1.TabIndex = 2;
@@ -62,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 76);
+            this.label2.Location = new System.Drawing.Point(16, 207);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 25);
             this.label2.TabIndex = 3;
@@ -71,7 +79,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(343, 82);
+            this.label3.Location = new System.Drawing.Point(347, 213);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 25);
             this.label3.TabIndex = 4;
@@ -80,7 +88,7 @@
             // 
             // dateTimePickerEnd
             // 
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(385, 77);
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(389, 208);
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
             this.dateTimePickerEnd.Size = new System.Drawing.Size(296, 31);
             this.dateTimePickerEnd.TabIndex = 5;
@@ -91,7 +99,7 @@
             this.columnHeaderData,
             this.columnHeaderT,
             this.columnHeaderP});
-            this.listViewMeasure.Location = new System.Drawing.Point(12, 203);
+            this.listViewMeasure.Location = new System.Drawing.Point(16, 334);
             this.listViewMeasure.Name = "listViewMeasure";
             this.listViewMeasure.Size = new System.Drawing.Size(682, 633);
             this.listViewMeasure.TabIndex = 7;
@@ -101,7 +109,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(36, 139);
+            this.label4.Location = new System.Drawing.Point(40, 270);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(121, 25);
             this.label4.TabIndex = 8;
@@ -109,7 +117,7 @@
             // 
             // buttonRun
             // 
-            this.buttonRun.Location = new System.Drawing.Point(719, 70);
+            this.buttonRun.Location = new System.Drawing.Point(817, 201);
             this.buttonRun.Name = "buttonRun";
             this.buttonRun.Size = new System.Drawing.Size(177, 49);
             this.buttonRun.TabIndex = 9;
@@ -134,27 +142,98 @@
             // 
             // textBoxLog
             // 
-            this.textBoxLog.Location = new System.Drawing.Point(813, 203);
+            this.textBoxLog.Location = new System.Drawing.Point(817, 334);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ReadOnly = true;
+            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxLog.Size = new System.Drawing.Size(840, 633);
             this.textBoxLog.TabIndex = 10;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(813, 139);
+            this.label5.Location = new System.Drawing.Point(817, 270);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(241, 25);
             this.label5.TabIndex = 11;
             this.label5.Text = "Протокол выполнения:";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 22);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(272, 25);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Параметры подключения:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(20, 84);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(159, 25);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Пользователь:";
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.Location = new System.Drawing.Point(185, 84);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(270, 31);
+            this.textBoxUsername.TabIndex = 14;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(473, 90);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 25);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Хост:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(838, 90);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(67, 25);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Порт:";
+            // 
+            // textBoxHostname
+            // 
+            this.textBoxHostname.Location = new System.Drawing.Point(544, 84);
+            this.textBoxHostname.Name = "textBoxHostname";
+            this.textBoxHostname.Size = new System.Drawing.Size(288, 31);
+            this.textBoxHostname.TabIndex = 17;
+            // 
+            // numericUpDownPort
+            // 
+            this.numericUpDownPort.Location = new System.Drawing.Point(911, 88);
+            this.numericUpDownPort.Maximum = new decimal(new int[] {
+            99000,
+            0,
+            0,
+            0});
+            this.numericUpDownPort.Name = "numericUpDownPort";
+            this.numericUpDownPort.Size = new System.Drawing.Size(198, 31);
+            this.numericUpDownPort.TabIndex = 19;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1700, 862);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1700, 993);
+            this.Controls.Add(this.numericUpDownPort);
+            this.Controls.Add(this.textBoxHostname);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.textBoxUsername);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxLog);
             this.Controls.Add(this.buttonRun);
@@ -168,6 +247,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Отопление и ГВС в ТСЖ Семь ветров";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPort)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,6 +267,13 @@
         private System.Windows.Forms.ColumnHeader columnHeaderP;
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxUsername;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxHostname;
+        private System.Windows.Forms.NumericUpDown numericUpDownPort;
     }
 }
 

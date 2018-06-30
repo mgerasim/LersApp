@@ -35,6 +35,11 @@ namespace LersAppHelper.Connectors
             string err = "";
             try
             {
+                Log("Установливаем соединение:");
+                Log("Имя пользователя: " + this._Username);
+                Log("Хост: " + this._Hostname);
+                Log("Порт: " + this._Port);
+
                 ProxySettings proxySettings = ProxySettings.GetSystemDefaultProxy();
                 var authInfo = new Lers.Networking.BasicAuthenticationInfo(this._Username,
                                         Lers.Networking.SecureStringHelper.ConvertToSecureString(this._Password));
@@ -71,6 +76,8 @@ namespace LersAppHelper.Connectors
                     }
                 }
 
+                Log("Разрываем соединение с сервером");
+                this.theServer.Disconnect(1000, true);
             }
             catch (AuthorizationFailedException ex)
             {
@@ -141,6 +148,8 @@ namespace LersAppHelper.Connectors
             finally
             {
                 this.connectCancellation.CancelAfter(1000);
+                this.connectCancellation.Dispose();
+
                 this. theSplash.Hide();
                 if (err.Length > 0)
                 {
