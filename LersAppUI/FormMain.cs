@@ -51,7 +51,7 @@ namespace LersAppUI
 
             this.theConnectorASync.connectCancellation = new System.Threading.CancellationTokenSource();
             this.theSplash.connectCancellation = this.theConnectorASync.connectCancellation;
-
+            
             this.theConnectorASync._Username = this.textBoxUsername.Text;
             this.theConnectorASync._Hostname = this.textBoxHostname.Text;
             this.theConnectorASync._Port = (ushort)this.numericUpDownPort.Value;
