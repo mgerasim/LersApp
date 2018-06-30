@@ -10,7 +10,7 @@ namespace LersAppHelper.Connectors
     {
         string Appname = "LersApp: Отопление и ГВС в ТСЖ Семь ветров (Тестовое задание)";
         public string _Username = "demo";
-        public string _Password = "dem1o";
+        public string _Password = "demo";
         public string _Hostname = "my.lers.ru";
         public ushort _Port = 10000;
 
